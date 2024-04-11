@@ -568,6 +568,9 @@ public class CodePush extends CordovaPlugin {
         int launchUrlLength = launchUrl.length();
         if (launchUrl.startsWith(CodePush.WWW_ASSET_PATH_PREFIX)) {
             launchUrl = launchUrl.substring(CodePush.WWW_ASSET_PATH_PREFIX.length(), launchUrlLength);
+        } else if (launchUrl.startsWith("http://") || launchUrl.startsWith("https://")) {
+            URI uri = URI.create(launchUrl);
+            launchUrl = uri.getPath();
         }
 
         return launchUrl;
